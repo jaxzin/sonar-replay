@@ -1,0 +1,43 @@
+#summary How to use the current release.
+#labels Featured,Phase-Deploy
+
+= Introduction =
+
+The current version only supports iterating over Perforce labels.  It is assumed you've installed Maven 2 and JDK 1.6 and setup the M2_HOME and JAVA_HOME environment variables.
+
+It also assumes you've setup the connection information for the sonar maven plugin as defined here http://docs.codehaus.org/display/SONAR/Install+Sonar#InstallSonar-Step5ConfigureMaven2
+
+= Details =
+
+Usage
+ * _*{{{java -jar sonar-replay.jar [-file <properties file>]}}}*_
+ * properties can be defined as system properties (-D...) or within an optional properties file.
+
+Supported properties:
+
+{{{
+
+# Required perforce connection information, p4host and p4port should be replaced with values for your env
+p4.url=p4java://p4host:p4port
+p4.user=example
+p4.password=example
+
+# optional, excludes source files from the Sonar reports
+sonar.exclusions=**/*Dummy.java,**/Dummy2.java
+
+# The path to your maven settings file, optional and defaults to this
+m2.settings=${user.home}/.m2/settings.xml
+
+# Filter to a specific timespan to process, optional
+p4.interval.start=2007-03-05
+p4.interval.end=2010-02-26
+
+# The actual depots to process
+p4.file.specs=//depot1/...,//depot2/...
+
+# Actual label filters to pass to p4 commands
+p4.label.name.filters=label1-*,label2-*
+
+# Post-filter if you need regex filtering.  Group 1 is used to set the property 'build.number'
+p4.label.filter=(?:label1|label2)-(\\d+[.\\d\\-a-z]*)
+}}}
