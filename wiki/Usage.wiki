@@ -10,7 +10,7 @@ It also assumes you've setup the connection information for the sonar maven plug
 = Details =
 
 Usage
- * _*{{{java -jar sonar-replay.jar [-file <properties file>]}}}*_
+ * _*{{{java -jar sonar-replay.jar [-props <properties file>]}}}*_
  * properties can be defined as system properties (-D...) or within an optional properties file.
 
 Supported properties:
